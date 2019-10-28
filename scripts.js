@@ -97,6 +97,57 @@ let updateTodoList = function () {
 
 }
 */
+
+Date.prototype.isValid = function () {
+  // An invalid date object returns NaN for getTime() and NaN is the only
+  // object not strictly equal to itself.
+  return this.getTime() === this.getTime();
+
+}; 
+
+function isDateIn(arr) {
+if(arr[0]>= arr[1] && arr[0] <= arr[2]) {
+  return 1;
+}else return 0;
+}
+
+function compareDates(b, e, ba) {
+  var begin = new Date(b);
+  var end = new Date(e);
+  var base = new Date(ba);
+
+  
+
+  // console.log(base);
+  // console.log(begin);
+  // console.log(end);
+  if(begin.isValid() && end.isValid()) {
+      if(base>begin && base <end) return true;
+      else return false;
+
+  // var day = [base.getDate(), begin.getDate(), end.getDate()];
+  // var month = [base.getMonth(), begin.getMonth(), end.getMonth()];
+  // var year = [base.getYear(), begin.getYear(), end.getYear()];
+  // for(let i in month ) {
+  //   console.log(month[i]);
+  // } 
+
+  // if(base.getYear() >= begin.getYear() && base.getYear() <= end.getYear()){
+  //   if(base.getYear() === begin.getYear() && base.getMonth() <= begin.getMonth()){
+      
+  //     if(base.getMonth() === begin.getMonth() && base.getDay() <= begin.getDay()) { 
+  //       return false;
+  //     } else return true;
+  //   }
+    
+      
+    
+     
+  //   return true;
+  // } else return false;
+   } else return true;
+}
+
 //DYNAMICZNA TABELA
 let createTd = function (row, content) {
     let td = document.createElement("td");
@@ -116,16 +167,20 @@ let updateTodoTable = function () {
 
     {
         let filterInput = document.getElementById("inputSearch");
-        let begin = new Date(document.getElementById("dateBegin"));
-      let end = new Date(document.getElementById("dateEnd"));
-      console.log(begin);
-      console.log(end);
+        let beginDate = document.getElementById("dateBegin");
+        var begin = new Date(beginDate.value);
+        let endDate = document.getElementById("dateEnd");
+       let end = new Date(endDate.value);
+     
         for (let todo in todoList) {
+         
             if (
-                (filterInput.value == "") ||
+
+              
+                ((filterInput.value == "") ||
                 (todoList[todo].title.includes(filterInput.value)) ||
-                (todoList[todo].description.includes(filterInput.value)) ||
-                (todoList[todo].dueDate.getTime() >= begin.getTime && todoList[todo].dueDate.getTime() <= end.getTime())
+                (todoList[todo].description.includes(filterInput.value))) &&
+                compareDates(begin, end, todoList[todo].dueDate)
             ) {
 
                 let row = todoTable.insertRow(todoTable.rows.length);
@@ -150,7 +205,7 @@ let updateTodoTable = function () {
 };
 
 //setInterval(updateTodoList, 1000);
-setInterval(updateTodoTable, 1000);
+setInterval(updateTodoTable, 10000);
 
 
 let deleteTodo = function (index) {
