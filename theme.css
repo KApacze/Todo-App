@@ -1,8 +1,9 @@
-td, th {
-    padding: 10px;
+td,
+th {
+  padding: 10px;
 }
 
 input {
-    margin-left: 5px;
-    margin-right: 15px;
+  margin-left: 5px;
+  margin-right: 15px;
 }

@@ -1,65 +1,81 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="theme.css"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="theme.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <script src="scripts.js"></script>
     <title>MyTODO App</title>
-</head>
-<body>
-<div class="container">
-    <h1 class="jumbotron text-center">MyNotes</h1>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="jumbotron text-center">MyNotes</h1>
 
-    <form class="form-control-range">
+      <form class="form-control-range">
         <label>Title</label>
-        <input type="text" id="inputTitle" class="form-control"/>
+        <input type="text" id="inputTitle" class="form-control" />
         <label>Description</label>
-        <input type="text" id="inputDescription" class="form-control"/>
+        <input type="text" id="inputDescription" class="form-control" />
         <label>Place</label>
-        <input type="text" id="inputPlace" class="form-control"/>
+        <input type="text" id="inputPlace" class="form-control" />
         <label>Due date</label>
-        <input type="date" id="inputDate" class="form-control"/>
-        <input type="button" value="add" style="margin-top: 10px" class="btn btn-info"
-               onclick="addTodo()"/>
-    </form>
+        <input type="date" id="inputDate" class="form-control" />
+        <input
+          type="button"
+          value="add"
+          style="margin-top: 10px"
+          class="btn btn-info"
+          onclick="addTodo()"
+        />
+      </form>
 
-    <form style="margin-top: 30px" class="form-inline">
+      <form style="margin-top: 30px" class="form-inline">
         <label>Search</label>
-        <input type="text"  class="form-control" id="inputSearch" placeholder="Type Your seach here..."/>
+        <input
+          type="text"
+          class="form-control"
+          id="inputSearch"
+          placeholder="Type Your seach here..."
+        />
         <label>From</label>
         <input type="date" class="form-control" id="dateBegin" />
         <label>To</label>
         <input type="date" class="form-control" id="dateEnd" />
+      </form>
 
-    </form>
-
-    <!-- <div id="todoListView"></div>
+      <!-- <div id="todoListView"></div>
          -->
-    <table class="table-striped" style="margin-top: 30px">
+      <table class="table-striped" style="margin-top: 30px">
         <thead>
-        <tr>
+          <tr>
             <th>Title</th>
             <th>Description</th>
             <th>Place</th>
             <th>Due date</th>
             <th>Delete</th>
-        </tr>
+          </tr>
         </thead>
-        <tbody id="todoTbody">
-
-        </tbody>
-    </table>
-
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-
-</body>
+        <tbody id="todoTbody"></tbody>
+      </table>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
