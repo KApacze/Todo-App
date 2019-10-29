@@ -5,26 +5,26 @@
 "use strict";
 let todoList = [];
 
-let initList = function() {
-  let savedList = window.localStorage.getItem("todos");
-  if (savedList != null) todoList = JSON.parse(savedList);
-  else
-    todoList.push(
-      {
-        title: "Learn JS",
-        description: "Create a demo application for my TODO's",
-        place: "445",
-        dueDate: new Date(2019, 10, 16)
-      },
-      {
-        title: "Lecture test",
-        description: "Quick test from the first three lectures",
-        place: "F6",
-        dueDate: new Date(2019, 10, 17)
-      }
-      // of course the lecture test mentioned above will not take place
-    );
-};
+// let initList = function() {
+//   let savedList = window.localStorage.getItem("todos");
+//   if (savedList != null) todoList = JSON.parse(savedList);
+//   else
+//     todoList.push(
+//       {
+//         title: "Learn JS",
+//         description: "Create a demo application for my TODO's",
+//         place: "445",
+//         dueDate: new Date(2019, 10, 16)
+//       },
+//       {
+//         title: "Lecture test",
+//         description: "Quick test from the first three lectures",
+//         place: "F6",
+//         dueDate: new Date(2019, 10, 17)
+//       }
+//       // of course the lecture test mentioned above will not take place
+//     );
+// };
 
 //initList();
 
@@ -37,7 +37,7 @@ $.ajax({
     "secret-key": "$2b$10$pks4rlNfI6NN6f1ph29HNOvWz9DvTtTpPd0nFi4qvdMEm/IkBt6Vm"
   },
   success: data => {
-    console.log(data);
+    // console.log(data);
     todoList = data;
   },
   error: err => {
@@ -57,7 +57,7 @@ let updateJSONbin = function() {
     contentType: "application/json",
     data: JSON.stringify(todoList),
     success: data => {
-      console.log(data);
+      // console.log(data);
     },
     error: err => {
       console.log(err.responseJSON);
@@ -104,9 +104,7 @@ let updateTodoList = function () {
 */
 
 Date.prototype.isValid = function() {
-  // An invalid date object returns NaN for getTime() and NaN is the only
-  // object not strictly equal to itself.
-  return this.getTime() === this.getTime();
+  return !isNaN(Date.parse(this));
 };
 
 function compareDates(b, e, ba) {
@@ -115,31 +113,19 @@ function compareDates(b, e, ba) {
   var base = new Date(ba);
 
   if (begin.isValid() && end.isValid()) {
-    if (base > begin && base < end) return true;
+    if (base >= begin && base <= end) return true;
     else return false;
   } else if (begin.isValid()) {
-    if (base > begin) return true;
+    if (base >= begin) return true;
     else return false;
   } else if (end.isValid()) {
-    if (base < end) return true;
+    if (base <= end) return true;
     else return false;
   } else return true;
 }
 
-//DYNAMICZNA TABELA
-let createTd = function(row, content) {
-  let td = $("<td></td>").text(content);
-  $(row).append(td);
-};
-
 let updateTodoTable = function() {
   let todoTable = $("#todoTbody").empty();
-
-  // while (todoTable.firstChild) {
-  //   todoTable.removeChild(todoTable.firstChild);
-  // }
-
-  //todoTable.rows.length
 
   {
     let filterInput = $("#inputSearch").val();
@@ -183,17 +169,11 @@ let deleteTodo = function(index) {
 };
 
 let addTodo = function() {
-  //get the elements in the form
-  // let inputTitle = document.getElementById("inputTitle");
-  // let inputDescription = document.getElementById("inputDescription");
-  // let inputPlace = document.getElementById("inputPlace");
-  // let inputDate = document.getElementById("inputDate");
   //get the values from the form
   let newTitle = $("#inputTitle").val();
   let newDescription = $("#inputDescription").val();
   let newPlace = $("#inputPlace").val();
   let newDate = new Date($("#inputDate").val());
-  console.log(newTitle)
   //create new item
   let newTodo = {
     title: newTitle,
