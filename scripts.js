@@ -133,41 +133,41 @@ let createTd = function(row, content) {
 };
 
 let updateTodoTable = function() {
-  let todoTable = document.getElementById("todoTbody");
+  let todoTable = $("#todoTbody").empty();
 
-  while (todoTable.firstChild) {
-    todoTable.removeChild(todoTable.firstChild);
-  }
+  // while (todoTable.firstChild) {
+  //   todoTable.removeChild(todoTable.firstChild);
+  // }
 
   //todoTable.rows.length
 
   {
-    let filterInput = document.getElementById("inputSearch");
-    let beginDate = document.getElementById("dateBegin");
-    var begin = new Date(beginDate.value);
-    let endDate = document.getElementById("dateEnd");
-    let end = new Date(endDate.value);
+    let filterInput = $("#inputSearch").val();
+
+    let beginDate = new Date($("#dateBegin").val());
+    let endDate = new Date($("#dateEnd").val());
 
     for (let todo in todoList) {
       if (
-        (filterInput.value == "" ||
-          todoList[todo].title.includes(filterInput.value) ||
-          todoList[todo].description.includes(filterInput.value)) &&
-        compareDates(begin, end, todoList[todo].dueDate)
+        (filterInput == "" ||
+          todoList[todo].title.includes(filterInput) ||
+          todoList[todo].description.includes(filterInput)) &&
+        compareDates(beginDate, endDate, todoList[todo].dueDate)
       ) {
         let date = new Date(todoList[todo].dueDate);
         let dateContent = date.toLocaleDateString();
-        let row = todoTable.insertRow(todoTable.rows.length);
-        createTd(row, todoList[todo].title);
-        createTd(row, todoList[todo].description);
-        createTd(row, todoList[todo].place);
-        createTd(row, dateContent);
-        let newDeleteButton = $("<input>").attr("type","button").attr("value", "x");
-        $(newDeleteButton).on("click", () => deleteTodo(todo));
-        let td = $("<td></td>");
-        $(td).append(newDeleteButton);
-        $(row).append(td);
-        //todoTable.appendChild(row);
+        let newDeleteButton = $("<input>")
+          .attr("type","button")
+          .attr("value", "x");
+        newDeleteButton.on("click", () => deleteTodo(todo));
+        let deleteTd = $("<td></td>").append(newDeleteButton);
+        let row = $("<tr></tr>")
+          .append($("<td></td>").text(todoList[todo].title))
+          .append($("<td></td>").text(todoList[todo].description))
+          .append($("<td></td>").text(todoList[todo].place))
+          .append($("<td></td>").text(dateContent))
+          .append(deleteTd);
+        todoTable.append(row);
       }
     }
   }
@@ -184,15 +184,16 @@ let deleteTodo = function(index) {
 
 let addTodo = function() {
   //get the elements in the form
-  let inputTitle = document.getElementById("inputTitle");
-  let inputDescription = document.getElementById("inputDescription");
-  let inputPlace = document.getElementById("inputPlace");
-  let inputDate = document.getElementById("inputDate");
+  // let inputTitle = document.getElementById("inputTitle");
+  // let inputDescription = document.getElementById("inputDescription");
+  // let inputPlace = document.getElementById("inputPlace");
+  // let inputDate = document.getElementById("inputDate");
   //get the values from the form
-  let newTitle = inputTitle.value;
-  let newDescription = inputDescription.value;
-  let newPlace = inputPlace.value;
-  let newDate = new Date(inputDate.value);
+  let newTitle = $("#inputTitle").val();
+  let newDescription = $("#inputDescription").val();
+  let newPlace = $("#inputPlace").val();
+  let newDate = new Date($("#inputDate").val());
+  console.log(newTitle)
   //create new item
   let newTodo = {
     title: newTitle,
