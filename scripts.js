@@ -160,12 +160,13 @@ let updateTodoTable = function () {
                 (todoList[todo].description.includes(filterInput.value))) &&
                 compareDates(begin, end, todoList[todo].dueDate)
             ) {
-
+                let date = new Date(todoList[todo].dueDate);
+                let dateContent = date.toLocaleDateString();
                 let row = todoTable.insertRow(todoTable.rows.length);
                 createTd(row, todoList[todo].title);
                 createTd(row, todoList[todo].description);
                 createTd(row, todoList[todo].place);
-                createTd(row, todoList[todo].dueDate);
+                createTd(row, dateContent);
                 let newDeleteButton = document.createElement("input");
                 newDeleteButton.type = "button";
                 newDeleteButton.value = "x";
@@ -216,11 +217,4 @@ let addTodo = function () {
     //save on local storage
     //window.localStorage.setItem("todos", JSON.stringify(todoList));
     updateJSONbin();
-
 };
-
-
-
-
-
-
