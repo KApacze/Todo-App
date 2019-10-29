@@ -128,34 +128,37 @@ let updateTodoTable = function() {
   let todoTable = $("#todoTbody").empty();
 
   {
-    let filterInput = $("#inputSearch").val();
+    let filterInput = $("#inputSearch")
+      .val()
+      .toUpperCase();
 
     let beginDate = new Date($("#dateBegin").val());
     let endDate = new Date($("#dateEnd").val());
 
-    for (let todo in todoList) {
+    todoList.forEach( todo => {
       if (
         (filterInput == "" ||
-          todoList[todo].title.includes(filterInput) ||
-          todoList[todo].description.includes(filterInput)) &&
-        compareDates(beginDate, endDate, todoList[todo].dueDate)
+          todo.title.toUpperCase().includes(filterInput) ||
+          todo.description.toUpperCase().includes(filterInput)) ||
+          todo.place.toUpperCase().includes(filterInput) &&
+        compareDates(beginDate, endDate, todo.dueDate)
       ) {
-        let date = new Date(todoList[todo].dueDate);
+        let date = new Date(todo.dueDate);
         let dateContent = date.toLocaleDateString();
         let newDeleteButton = $("<input>")
-          .attr("type","button")
+          .attr("type", "button")
           .attr("value", "x");
         newDeleteButton.on("click", () => deleteTodo(todo));
         let deleteTd = $("<td></td>").append(newDeleteButton);
         let row = $("<tr></tr>")
-          .append($("<td></td>").text(todoList[todo].title))
-          .append($("<td></td>").text(todoList[todo].description))
-          .append($("<td></td>").text(todoList[todo].place))
+          .append($("<td></td>").text(todo.title))
+          .append($("<td></td>").text(todo.description))
+          .append($("<td></td>").text(todo.place))
           .append($("<td></td>").text(dateContent))
           .append(deleteTd);
         todoTable.append(row);
       }
-    }
+    });
   }
 };
 
