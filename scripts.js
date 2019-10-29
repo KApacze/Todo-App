@@ -128,10 +128,8 @@ function compareDates(b, e, ba) {
 
 //DYNAMICZNA TABELA
 let createTd = function(row, content) {
-  let td = document.createElement("td");
-  let text = document.createTextNode(content);
-  td.appendChild(text);
-  row.appendChild(td);
+  let td = $("<td></td>").text(content);
+  $(row).append(td);
 };
 
 let updateTodoTable = function() {
@@ -164,15 +162,11 @@ let updateTodoTable = function() {
         createTd(row, todoList[todo].description);
         createTd(row, todoList[todo].place);
         createTd(row, dateContent);
-        let newDeleteButton = document.createElement("input");
-        newDeleteButton.type = "button";
-        newDeleteButton.value = "x";
-        newDeleteButton.addEventListener("click", function() {
-          deleteTodo(todo);
-        });
-        let td = document.createElement("td");
-        td.appendChild(newDeleteButton);
-        row.appendChild(td);
+        let newDeleteButton = $("<input>").attr("type","button").attr("value", "x");
+        $(newDeleteButton).on("click", () => deleteTodo(todo));
+        let td = $("<td></td>");
+        $(td).append(newDeleteButton);
+        $(row).append(td);
         //todoTable.appendChild(row);
       }
     }
