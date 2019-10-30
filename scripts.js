@@ -139,8 +139,8 @@ let updateTodoTable = function() {
       if (
         (filterInput == "" ||
           todo.title.toUpperCase().includes(filterInput) ||
-          todo.description.toUpperCase().includes(filterInput)) ||
-          todo.place.toUpperCase().includes(filterInput) &&
+          todo.description.toUpperCase().includes(filterInput) ||
+          todo.place.toUpperCase().includes(filterInput)) &&
         compareDates(beginDate, endDate, todo.dueDate)
       ) {
         let date = new Date(todo.dueDate);
